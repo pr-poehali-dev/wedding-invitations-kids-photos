@@ -50,10 +50,10 @@ export default function Countdown() {
             className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl text-3xl md:text-4xl font-bold"
             style={{
               background: 'white',
-              border: '3px solid var(--color-rose)',
-              color: 'var(--color-deep)',
-              fontFamily: 'Caveat, cursive',
-              boxShadow: '4px 4px 0 var(--color-rose)',
+              border: '2px solid var(--ink)',
+              color: 'var(--ink)',
+              fontFamily: 'Playfair Display, serif',
+              boxShadow: '4px 4px 0 var(--gold)',
             }}
           >
             <span className="text-3xl md:text-4xl">{String(value).padStart(2, '0')}</span>
@@ -61,7 +61,7 @@ export default function Countdown() {
           </div>
           <span
             className="mt-2 text-sm font-medium"
-            style={{ color: 'var(--color-rose)', fontFamily: 'Golos Text, sans-serif' }}
+            style={{ color: 'var(--gold)', fontFamily: 'Lora, serif', letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: '0.65rem' }}
           >
             {label}
           </span>

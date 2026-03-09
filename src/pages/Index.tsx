@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import Countdown from '@/components/Countdown';
-import ConfettiBackground from '@/components/ConfettiBackground';
 import Icon from '@/components/ui/icon';
 
-const HERO_ILLUSTRATION = 'https://cdn.poehali.dev/projects/1cacb459-2045-4177-93bd-a2743e5d82d7/files/efd29476-ee6a-49ac-95c3-de8b31cbeaea.jpg';
-const KIDS_ILLUSTRATION = 'https://cdn.poehali.dev/projects/1cacb459-2045-4177-93bd-a2743e5d82d7/files/12db111d-0757-4093-92c9-2233e58cfce3.jpg';
+const MOON_ILLUSTRATION = 'https://cdn.poehali.dev/projects/1cacb459-2045-4177-93bd-a2743e5d82d7/files/fa5fe2ca-cebf-4750-9eb3-dfc242bbfbb9.jpg';
+const GROOVY_ILLUSTRATION = 'https://cdn.poehali.dev/projects/1cacb459-2045-4177-93bd-a2743e5d82d7/files/baf08665-914d-4499-b8da-9e9b61beb2a4.jpg';
 
-const PLACEHOLDER_PHOTOS = [
-  { src: '/placeholder.jpg', caption: 'Алёша, 3 года', rotate: '-rotate-3' },
-  { src: '/placeholder.jpg', caption: 'Маша, 2 года', rotate: 'rotate-2' },
-  { src: '/placeholder.jpg', caption: 'Алёша, 6 лет', rotate: '-rotate-1' },
-  { src: '/placeholder.jpg', caption: 'Маша, 5 лет', rotate: 'rotate-3' },
-  { src: '/placeholder.jpg', caption: 'Алёша, 9 лет', rotate: '-rotate-2' },
-  { src: '/placeholder.jpg', caption: 'Маша, 8 лет', rotate: 'rotate-1' },
+const TILTS = ['-2.5deg', '1.8deg', '-1.2deg', '2.8deg', '-3.1deg', '1.4deg'];
+
+const PHOTOS = [
+  { caption: 'Алёша, 3 года' },
+  { caption: 'Маша, 2 года' },
+  { caption: 'Алёша, 6 лет' },
+  { caption: 'Маша, 5 лет' },
+  { caption: 'Алёша, 9 лет' },
+  { caption: 'Маша, 8 лет' },
 ];
 
 const GIFTS = [
-  { emoji: '🏡', title: 'Мечта о доме', desc: 'Копим на уютное гнёздышко — вклад в общий котёл будет очень кстати!' },
-  { emoji: '✈️', title: 'Медовый месяц', desc: 'Нас ждёт путешествие мечты — поможете нам добраться туда?' },
-  { emoji: '💝', title: 'Просто обнимите нас', desc: 'Ваше присутствие и радость — лучший подарок на свете!' },
+  { symbol: '⌂', title: 'Наш дом', desc: 'Мечтаем о собственном гнёздышке — любой вклад приближает нас к мечте.' },
+  { symbol: '✈', title: 'Путешествие', desc: 'Нас ждёт медовый месяц в дальних краях — помоги нам добраться!' },
+  { symbol: '♡', title: 'Твоё присутствие', desc: 'Честно — видеть тебя рядом дороже любого подарка на свете.' },
 ];
 
 export default function Index() {
@@ -31,130 +32,171 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--color-cream)' }}>
-      <ConfettiBackground />
+    <div className="min-h-screen" style={{ background: 'var(--cream)', color: 'var(--ink)' }}>
 
-      {/* TICKER TAPE */}
-      <div
-        className="ticker-wrap py-2 relative z-10"
-        style={{ background: 'var(--color-rose)', color: 'white' }}
-      >
-        <div className="animate-ticker inline-flex gap-8 text-sm font-medium" style={{ fontFamily: 'Caveat, cursive', fontSize: '1.1rem' }}>
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={i} className="mx-6">
-              💍 Алексей &amp; Мария выходят замуж! &nbsp;✨ Только раз в жизни! &nbsp;🌸 Мы ждём именно тебя! &nbsp;
+      {/* TICKER */}
+      <div className="ticker-wrap py-2" style={{ background: 'var(--ink)', color: 'var(--cream)' }}>
+        <div
+          className="animate-ticker inline-flex"
+          style={{ fontFamily: 'Caveat, cursive', fontSize: '1.05rem', letterSpacing: '0.03em' }}
+        >
+          {Array.from({ length: 10 }).map((_, i) => (
+            <span key={i} className="mx-8">
+              ✦ АЛЕКСЕЙ &amp; МАРИЯ ✦ 6 СЕНТЯБРЯ 2025 ✦ РЕСТОРАН «СКАЗКА» ✦
             </span>
           ))}
         </div>
       </div>
 
       {/* HERO */}
-      <section className="relative px-4 pt-16 pb-10 flex flex-col items-center text-center z-10">
-        {/* Decorative blobs */}
-        <div className="absolute top-10 left-5 w-32 h-32 rounded-full opacity-20 pointer-events-none"
-          style={{ background: 'var(--color-rose)', filter: 'blur(40px)' }} />
-        <div className="absolute top-20 right-8 w-40 h-40 rounded-full opacity-15 pointer-events-none"
-          style={{ background: 'var(--color-mint)', filter: 'blur(50px)' }} />
-
-        <img
-          src={HERO_ILLUSTRATION}
-          alt="Жених и невеста в детстве"
-          className="w-56 h-56 md:w-72 md:h-72 object-cover rounded-full animate-float sticker-shadow mb-8"
-          style={{ border: '5px solid var(--color-rose)', boxShadow: '6px 6px 0 var(--color-coral)' }}
+      <section className="relative px-4 pt-16 pb-12 flex flex-col items-center text-center max-w-3xl mx-auto">
+        <div
+          className="absolute top-8 left-1/2 -translate-x-1/2 w-72 h-72 md:w-96 md:h-96 rounded-full pointer-events-none opacity-10 animate-spin-slow"
+          style={{ border: '2px dashed var(--gold)' }}
         />
 
-        <div className="animate-fade-slide-up">
-          <p className="text-lg mb-2" style={{ color: 'var(--color-rose)', fontFamily: 'Caveat, cursive', fontSize: '1.4rem' }}>
-            Когда-то два малыша выросли и...
+        <div className="relative mb-10 animate-float">
+          <img
+            src={MOON_ILLUSTRATION}
+            alt="Иллюстрация"
+            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full"
+            style={{ border: '4px solid var(--ink)', boxShadow: '8px 8px 0 var(--gold)' }}
+          />
+          <div
+            className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full flex items-center justify-center animate-stamp"
+            style={{
+              background: 'var(--rust)',
+              border: '3px solid var(--ink)',
+              color: 'var(--cream)',
+              fontFamily: 'Caveat, cursive',
+              fontSize: '0.65rem',
+              lineHeight: 1.2,
+              textAlign: 'center',
+              padding: '8px',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span>SEPT<br />2025<br />♡</span>
+          </div>
+        </div>
+
+        <div className="animate-fade-up w-full">
+          <p
+            className="uppercase tracking-[0.3em] text-xs mb-4"
+            style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}
+          >
+            Вы приглашены на свадьбу
           </p>
           <h1
-            className="text-5xl md:text-7xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
+            className="leading-none mb-2"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(3rem, 10vw, 6rem)',
+              fontStyle: 'italic',
+              color: 'var(--ink)',
+            }}
           >
-            Алексей<br />
-            <span style={{ color: 'var(--color-rose)' }}>&amp;</span>
-            <br />Мария
+            Алексей
           </h1>
-          <p className="text-2xl mb-8" style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-coral)' }}>
-            приглашают тебя на свою свадьбу! 🎉
+          <p className="my-1" style={{ fontFamily: 'Lora, serif', fontSize: '1.1rem', color: 'var(--gold)' }}>
+            ✦ &amp; ✦
           </p>
-        </div>
+          <h1
+            className="leading-none mb-8"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(3rem, 10vw, 6rem)',
+              fontStyle: 'italic',
+              color: 'var(--ink)',
+            }}
+          >
+            Мария
+          </h1>
 
-        {/* Info cards */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10 w-full max-w-2xl">
-          {[
-            { icon: 'Calendar', label: 'Дата', value: '6 сентября 2025', emoji: '📅', bg: '#FFF0F5' },
-            { icon: 'Clock', label: 'Время', value: '14:00', emoji: '⏰', bg: '#FFF8E7' },
-            { icon: 'MapPin', label: 'Место', value: 'Ресторан «Сказка»\nМосква, ул. Весенняя, 12', emoji: '📍', bg: '#F0FFF8' },
-          ].map(({ icon, label, value, emoji, bg }) => (
-            <div
-              key={label}
-              className="flex-1 min-w-[140px] max-w-[200px] p-4 rounded-2xl text-center"
-              style={{
-                background: bg,
-                border: '2px solid var(--color-rose)',
-                boxShadow: '4px 4px 0 var(--color-rose)',
-              }}
-            >
-              <div className="text-2xl mb-1">{emoji}</div>
-              <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--color-rose)' }}>{label}</div>
-              <div className="text-sm font-semibold whitespace-pre-line" style={{ color: 'var(--color-deep)' }}>{value}</div>
-            </div>
-          ))}
-        </div>
+          {/* Info strip */}
+          <div
+            className="flex flex-wrap justify-center mb-10 mx-auto max-w-xl"
+            style={{ borderTop: '1px solid var(--ink)', borderBottom: '1px solid var(--ink)' }}
+          >
+            {[
+              { label: 'Дата', value: '6 сентября 2025' },
+              { label: 'Время', value: '14:00' },
+              { label: 'Место', value: 'Ресторан «Сказка»' },
+            ].map(({ label, value }, i, arr) => (
+              <div
+                key={label}
+                className="flex-1 min-w-[110px] py-4 px-3"
+                style={{ borderRight: i < arr.length - 1 ? '1px solid var(--ink)' : 'none' }}
+              >
+                <div
+                  className="uppercase text-xs tracking-widest mb-1"
+                  style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}
+                >
+                  {label}
+                </div>
+                <div className="font-semibold text-sm" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)' }}>
+                  {value}
+                </div>
+              </div>
+            ))}
+          </div>
 
-        {/* Countdown */}
-        <div className="w-full max-w-xl">
-          <p className="text-center mb-5 text-base" style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-deep)', fontSize: '1.3rem' }}>
-            До нашей свадьбы осталось... 🥹
+          <p className="mb-6 italic text-sm" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+            До торжества осталось...
           </p>
           <Countdown />
         </div>
       </section>
 
       {/* DIVIDER */}
-      <div className="text-center text-3xl py-4 tracking-widest opacity-60">
-        ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿
-      </div>
+      <Divider />
 
       {/* GALLERY */}
-      <section className="px-4 py-10 max-w-4xl mx-auto z-10 relative">
+      <section className="px-4 py-10 max-w-4xl mx-auto">
         <div className="text-center mb-10">
+          <p className="uppercase tracking-[0.25em] text-xs mb-3" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+            Архив воспоминаний
+          </p>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-3"
-            style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+              fontStyle: 'italic',
+              color: 'var(--ink)',
+            }}
           >
-            Мы с самого начала 👶
+            Давным-давно...
           </h2>
-          <p style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-rose)', fontSize: '1.2rem' }}>
-            Посмотри, какими мы были маленькими!
+          <p className="mt-2 text-sm italic" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)', opacity: 0.55 }}>
+            Маленькие дети, которые однажды встретились и влюбились
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {PLACEHOLDER_PHOTOS.map(({ src, caption, rotate }, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
+          {PHOTOS.map(({ caption }, i) => (
             <div
               key={i}
-              className={`photo-card ${rotate} cursor-pointer`}
-              style={{ animationDelay: `${i * 0.1}s` }}
+              className="photo-card"
+              style={{ transform: `rotate(${TILTS[i]})` }}
             >
               <div
-                className="rounded-2xl overflow-hidden"
+                className="p-3 pb-10"
                 style={{
-                  border: '3px solid white',
-                  boxShadow: '5px 5px 0 var(--color-rose)',
                   background: 'white',
-                  padding: '8px 8px 32px 8px',
+                  border: '1.5px solid var(--ink)',
+                  boxShadow: '4px 4px 0 rgba(28,16,8,0.2)',
                 }}
               >
                 <img
-                  src={src}
+                  src="/placeholder.jpg"
                   alt={caption}
-                  className="w-full h-36 md:h-44 object-cover rounded-xl"
+                  className="w-full h-36 md:h-44 object-cover"
+                  style={{ display: 'block', filter: 'sepia(25%)' }}
                 />
                 <p
-                  className="text-center mt-2 text-sm"
-                  style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-deep)', fontSize: '1rem' }}
+                  className="text-center mt-3 text-sm"
+                  style={{ fontFamily: 'Caveat, cursive', color: 'var(--ink)', fontSize: '1rem' }}
                 >
                   {caption}
                 </p>
@@ -163,106 +205,109 @@ export default function Index() {
           ))}
         </div>
 
-        <div className="mt-6 text-center">
-          <p
-            className="inline-block px-4 py-2 rounded-full text-sm"
+        <div className="text-center mt-10">
+          <span
+            className="text-xs italic"
             style={{
-              background: 'var(--color-peach)',
-              color: 'var(--color-deep)',
-              fontFamily: 'Caveat, cursive',
-              fontSize: '1.05rem',
-              border: '2px dashed var(--color-rose)',
+              color: 'var(--ink)',
+              opacity: 0.45,
+              fontFamily: 'Lora, serif',
+              border: '1px dashed',
+              borderColor: 'var(--gold)',
+              display: 'inline-block',
+              padding: '8px 20px',
             }}
           >
-            📸 Здесь будут ваши настоящие детские фото — просто загрузи их!
-          </p>
+            📸 Здесь появятся ваши настоящие детские фото
+          </span>
         </div>
       </section>
 
       {/* DIVIDER */}
-      <div className="text-center text-3xl py-4 tracking-widest opacity-60">
-        ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥
-      </div>
+      <Divider />
 
       {/* RSVP */}
-      <section className="px-4 py-10 max-w-xl mx-auto z-10 relative">
+      <section className="px-4 py-10 max-w-lg mx-auto">
         <div className="text-center mb-8">
+          <p className="uppercase tracking-[0.25em] text-xs mb-3" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+            Подтверждение
+          </p>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-3"
-            style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2rem, 6vw, 3rem)',
+              fontStyle: 'italic',
+              color: 'var(--ink)',
+            }}
           >
-            Ты придёшь? 🥺
+            Ты придёшь?
           </h2>
-          <p style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-rose)', fontSize: '1.2rem' }}>
-            Пожалуйста, подтверди своё присутствие до 1 августа
+          <p className="mt-2 text-sm italic" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)', opacity: 0.55 }}>
+            Просим подтвердить присутствие до 1 августа 2025
           </p>
         </div>
 
         {submitted ? (
           <div
-            className="text-center p-8 rounded-3xl animate-pop-in"
+            className="text-center py-12 animate-stamp"
             style={{
+              border: '2px solid var(--ink)',
               background: 'white',
-              border: '3px solid var(--color-mint)',
-              boxShadow: '6px 6px 0 var(--color-mint)',
+              boxShadow: '6px 6px 0 var(--gold)',
             }}
           >
-            <div className="text-6xl mb-4 animate-heart inline-block">💌</div>
-            <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}>
-              Ура! Мы тебя ждём!
+            <div className="text-5xl mb-4">✉</div>
+            <h3
+              className="text-2xl font-bold italic mb-2"
+              style={{ fontFamily: 'Playfair Display, serif', color: 'var(--ink)' }}
+            >
+              Получено!
             </h3>
-            <p style={{ color: 'var(--color-muted-foreground)', fontFamily: 'Caveat, cursive', fontSize: '1.2rem' }}>
-              Спасибо, что подтвердил(а)! Увидимся на свадьбе 🎊
+            <p className="text-sm italic" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)', opacity: 0.65 }}>
+              Мы с нетерпением ждём встречи с тобой 🥂
             </p>
           </div>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="rounded-3xl p-6 md:p-8"
-            style={{
-              background: 'white',
-              border: '3px solid var(--color-rose)',
-              boxShadow: '6px 6px 0 var(--color-rose)',
-            }}
+            className="p-6 md:p-8"
+            style={{ border: '2px solid var(--ink)', background: 'white', boxShadow: '6px 6px 0 var(--gold)' }}
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--color-deep)' }}>
-                  Твоё имя *
+                <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+                  Ваше имя
                 </label>
                 <input
                   type="text"
                   required
                   value={rsvp.name}
                   onChange={e => setRsvp({ ...rsvp, name: e.target.value })}
-                  placeholder="Как тебя зовут?"
-                  className="w-full px-4 py-3 rounded-xl outline-none text-sm"
-                  style={{
-                    border: '2px solid var(--color-rose)',
-                    fontFamily: 'Golos Text, sans-serif',
-                    color: 'var(--color-deep)',
-                  }}
+                  placeholder="Как вас зовут?"
+                  className="w-full px-4 py-3 text-sm outline-none"
+                  style={{ border: '1.5px solid var(--ink)', color: 'var(--ink)', background: 'var(--cream)' }}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--color-deep)' }}>
-                  Придёшь? *
+                <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+                  Присутствие
                 </label>
                 <div className="flex gap-3">
                   {[
-                    { value: 'yes', label: '✅ Да, конечно!' },
-                    { value: 'no', label: '😢 Не смогу' },
+                    { value: 'yes', label: 'С радостью буду' },
+                    { value: 'no', label: 'К сожалению, нет' },
                   ].map(opt => (
                     <button
                       key={opt.value}
                       type="button"
                       onClick={() => setRsvp({ ...rsvp, attending: opt.value })}
-                      className="flex-1 py-3 rounded-xl text-sm font-semibold transition-all btn-fun"
+                      className="flex-1 py-3 text-xs uppercase tracking-wider font-semibold btn-stamp"
                       style={{
-                        background: rsvp.attending === opt.value ? 'var(--color-rose)' : 'var(--color-peach)',
-                        color: rsvp.attending === opt.value ? 'white' : 'var(--color-deep)',
-                        border: '2px solid var(--color-rose)',
+                        background: rsvp.attending === opt.value ? 'var(--ink)' : 'var(--cream)',
+                        color: rsvp.attending === opt.value ? 'var(--cream)' : 'var(--ink)',
+                        border: '1.5px solid var(--ink)',
+                        fontFamily: 'Lora, serif',
                       }}
                     >
                       {opt.label}
@@ -272,18 +317,14 @@ export default function Index() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--color-deep)' }}>
+                <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
                   Количество гостей
                 </label>
                 <select
                   value={rsvp.guests}
                   onChange={e => setRsvp({ ...rsvp, guests: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl outline-none text-sm"
-                  style={{
-                    border: '2px solid var(--color-rose)',
-                    color: 'var(--color-deep)',
-                    background: 'white',
-                  }}
+                  className="w-full px-4 py-3 text-sm outline-none"
+                  style={{ border: '1.5px solid var(--ink)', color: 'var(--ink)', background: 'var(--cream)' }}
                 >
                   {['1', '2', '3', '4', '5+'].map(n => (
                     <option key={n} value={n}>{n} {n === '1' ? 'человек' : 'человека'}</option>
@@ -292,36 +333,30 @@ export default function Index() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1" style={{ color: 'var(--color-deep)' }}>
-                  Пожелание молодожёнам 💌
+                <label className="block text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+                  Пожелания молодожёнам
                 </label>
                 <textarea
                   rows={3}
                   value={rsvp.message}
                   onChange={e => setRsvp({ ...rsvp, message: e.target.value })}
-                  placeholder="Напиши что-нибудь тёплое..."
-                  className="w-full px-4 py-3 rounded-xl outline-none text-sm resize-none"
-                  style={{
-                    border: '2px solid var(--color-rose)',
-                    fontFamily: 'Golos Text, sans-serif',
-                    color: 'var(--color-deep)',
-                  }}
+                  placeholder="Напишите тёплые слова..."
+                  className="w-full px-4 py-3 text-sm outline-none resize-none"
+                  style={{ border: '1.5px solid var(--ink)', color: 'var(--ink)', background: 'var(--cream)' }}
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl font-bold text-lg btn-fun"
+                className="w-full py-4 text-xs uppercase tracking-widest font-semibold btn-stamp"
                 style={{
-                  background: 'var(--color-rose)',
-                  color: 'white',
-                  border: '3px solid var(--color-deep)',
-                  boxShadow: '4px 4px 0 var(--color-deep)',
-                  fontFamily: 'Caveat, cursive',
-                  fontSize: '1.3rem',
+                  background: 'var(--ink)',
+                  color: 'var(--cream)',
+                  border: '2px solid var(--ink)',
+                  fontFamily: 'Lora, serif',
                 }}
               >
-                Отправить! 🚀
+                Отправить подтверждение
               </button>
             </div>
           </form>
@@ -329,45 +364,41 @@ export default function Index() {
       </section>
 
       {/* DIVIDER */}
-      <div className="text-center text-3xl py-4 tracking-widest opacity-60">
-        🎁 🎁 🎁 🎁 🎁 🎁 🎁 🎁 🎁
-      </div>
+      <Divider />
 
       {/* GIFTS */}
-      <section className="px-4 py-10 max-w-3xl mx-auto z-10 relative">
+      <section className="px-4 py-10 max-w-3xl mx-auto">
         <div className="text-center mb-10">
-          <h2
-            className="text-4xl md:text-5xl font-bold mb-3"
-            style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
-          >
-            Подарки 🎀
-          </h2>
-          <p style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-rose)', fontSize: '1.2rem' }}>
-            Ваше присутствие — уже лучший подарок!<br />Но если хочется что-то подарить...
+          <p className="uppercase tracking-[0.25em] text-xs mb-3" style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}>
+            Реестр подарков
           </p>
+          <h2
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2rem, 6vw, 3rem)',
+              fontStyle: 'italic',
+              color: 'var(--ink)',
+            }}
+          >
+            Пожелания
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {GIFTS.map(({ emoji, title, desc }, i) => (
+          {GIFTS.map(({ symbol, title, desc }, i) => (
             <div
               key={i}
-              className="p-6 rounded-3xl text-center photo-card cursor-default"
-              style={{
-                background: 'white',
-                border: '3px solid var(--color-coral)',
-                boxShadow: '5px 5px 0 var(--color-coral)',
-              }}
+              className="p-6 text-center"
+              style={{ border: '1.5px solid var(--ink)', background: 'white', boxShadow: '4px 4px 0 var(--gold)' }}
             >
-              <div className="text-5xl mb-3 animate-wiggle inline-block" style={{ animationDelay: `${i * 0.3}s` }}>
-                {emoji}
-              </div>
+              <div className="text-4xl mb-4" style={{ color: 'var(--gold)' }}>{symbol}</div>
               <h3
-                className="text-xl font-bold mb-2"
-                style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
+                className="text-lg font-bold italic mb-3"
+                style={{ fontFamily: 'Playfair Display, serif', color: 'var(--ink)' }}
               >
                 {title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted-foreground)' }}>
+              <p className="text-sm leading-relaxed" style={{ fontFamily: 'Lora, serif', color: 'var(--ink)', opacity: 0.7 }}>
                 {desc}
               </p>
             </div>
@@ -376,57 +407,73 @@ export default function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer className="text-center py-12 px-4 relative z-10">
+      <footer className="text-center py-16 px-4 mt-8" style={{ background: 'var(--ink)', color: 'var(--cream)' }}>
         <img
-          src={KIDS_ILLUSTRATION}
-          alt="Малыши жених и невеста"
-          className="w-32 h-32 object-cover rounded-full mx-auto mb-6 sticker-shadow"
-          style={{ border: '4px solid var(--color-yellow)', boxShadow: '4px 4px 0 var(--color-coral)' }}
+          src={GROOVY_ILLUSTRATION}
+          alt="Иллюстрация"
+          className="w-24 h-24 object-cover rounded-full mx-auto mb-6"
+          style={{ border: '3px solid var(--gold)', boxShadow: '4px 4px 0 var(--gold)', opacity: 0.9 }}
         />
         <p
-          className="text-3xl font-bold mb-2"
-          style={{ fontFamily: 'Cormorant Garamond, serif', color: 'var(--color-deep)' }}
+          className="italic mb-1"
+          style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', color: 'var(--cream)' }}
         >
-          До встречи на свадьбе!
+          До встречи!
         </p>
         <p
-          className="text-xl mb-6 animate-pulse-soft"
-          style={{ fontFamily: 'Caveat, cursive', color: 'var(--color-rose)' }}
+          className="text-xs uppercase tracking-widest mb-8 animate-pulse-soft"
+          style={{ color: 'var(--gold)', fontFamily: 'Lora, serif' }}
         >
-          6 сентября 2025 · Ресторан «Сказка» · 14:00 🌸
+          6 СЕНТЯБРЯ 2025 · РЕСТОРАН «СКАЗКА» · 14:00
         </p>
+
         <div className="flex justify-center gap-4">
           <a
             href="tel:+79001234567"
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl font-semibold btn-fun text-sm"
+            className="flex items-center gap-2 px-5 py-3 text-xs uppercase tracking-wider btn-stamp"
             style={{
-              background: 'white',
-              border: '2px solid var(--color-rose)',
-              color: 'var(--color-rose)',
+              border: '1.5px solid var(--cream)',
+              color: 'var(--cream)',
               textDecoration: 'none',
+              fontFamily: 'Lora, serif',
+              boxShadow: '3px 3px 0 var(--gold)',
             }}
           >
-            <Icon name="Phone" size={16} />
+            <Icon name="Phone" size={14} />
             Позвонить
           </a>
           <a
             href="https://t.me/username"
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl font-semibold btn-fun text-sm"
+            className="flex items-center gap-2 px-5 py-3 text-xs uppercase tracking-wider btn-stamp"
             style={{
-              background: 'var(--color-rose)',
-              border: '2px solid var(--color-deep)',
-              color: 'white',
+              background: 'var(--gold)',
+              border: '1.5px solid var(--gold)',
+              color: 'var(--ink)',
               textDecoration: 'none',
+              fontFamily: 'Lora, serif',
+              boxShadow: '3px 3px 0 var(--cream)',
             }}
           >
-            <Icon name="MessageCircle" size={16} />
+            <Icon name="Send" size={14} />
             Telegram
           </a>
         </div>
-        <p className="mt-8 text-xs" style={{ color: 'var(--color-muted-foreground)' }}>
-          Сделано с любовью ♥
+
+        <p className="mt-10 text-xs" style={{ color: 'var(--gold)', opacity: 0.4, fontFamily: 'Lora, serif' }}>
+          Сделано с любовью ♡
         </p>
       </footer>
+
+    </div>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="flex items-center gap-4 px-8 py-6 max-w-2xl mx-auto">
+      <div className="flex-1 h-px" style={{ background: 'var(--ink)', opacity: 0.18 }} />
+      <span style={{ color: 'var(--gold)', fontSize: '1.3rem' }}>✦ ❧ ✦</span>
+      <div className="flex-1 h-px" style={{ background: 'var(--ink)', opacity: 0.18 }} />
     </div>
   );
 }
