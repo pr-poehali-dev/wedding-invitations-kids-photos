@@ -7,7 +7,8 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
-			"./1773086913926216205.html"
+			"./1773086913926216205.html",
+			"./1773086991037586272.html"
 	],
 	prefix: "",
 	theme: {
@@ -87,9 +88,14 @@ export default {
 					}
 				}
 			},
+			fontFamily: {
+				caveat: ['Caveat', 'cursive'],
+				cormorant: ['Cormorant Garamond', 'serif'],
+				golos: ['Golos Text', 'sans-serif'],
+			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
 			}
 		}
 	},
